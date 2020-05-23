@@ -247,6 +247,11 @@ def config_path_dataset():
     return ddict['dataset']
 
 
+def get_log_verbose():
+    ddict = config_load_root()
+    return ddict['verbose']
+
+
 def config_set(ddict2):
     ddict = config_load_root()
 
@@ -692,6 +697,10 @@ def path_local_setup(current_file=None, out_folder="", sublevel=0, data_path="da
     log(data_path, out_path, model_path)
     return data_path, out_path, model_path
 """
+
+####################################################################################################
+
+
 
 
 
