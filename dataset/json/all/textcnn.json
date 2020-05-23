@@ -1,0 +1,42 @@
+{
+    "test": {
+
+        "hypermodel_pars" :{
+
+
+
+
+        },
+
+
+        "data_pars": {
+            "train": true, "dt_source": "amazon_aws", "dt_name": "Inc"},
+
+
+        "model_pars": {
+            "model_type": "tabular",
+            "learning_rate_min": 1e-4,
+            "learning_rate_max": 1e-2,
+            "learning_rate_default": 5e-4
+
+
+        },
+
+
+        "compute_pars": {
+            "hp_tune": true,
+            "num_epochs": 10,
+            "time_limits": 120,
+            "num_trials": 5,
+            "search_strategy": "skopt"
+        },
+
+        "out_pars": {}
+    },
+
+
+
+
+
+    "prod": {}
+}

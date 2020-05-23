@@ -1,0 +1,172 @@
+{
+  "test" : {
+
+    "BERT_RANKING":{
+       "model_pars":{ 
+          "model_uri" : "model_tch.matchzoo_models",
+          "model":"BERT",
+          "model_pars":{
+             "mode":"bert-base-uncased",
+             "dropout_rate":0.2
+          },
+
+          "task":"ranking",
+          "task_pars" : {   },
+
+          "loss":{ "RankHingeLoss":{}},
+
+          "metrics":{
+             "NormalizedDiscountedCumulativeGain":{"k":3 },
+             "NormalizedDiscountedCumulativeGain":{"k":5 },
+             "MeanAveragePrecision":{}
+          }
+      },
+
+
+   "data_pars": {  
+      "data_info": { "name" : "text_dataset",   "data_path": "dataset/nlp/WIKI_QA/" , 
+                     "train": true
+                  } 
+      },
+ 
+
+      "preprocessors": [ 
+                {  "uri" : "mlmodels.preprocess.generic.:train_test_val_split",
+                    "arg" : {   "split_if_exists": true, "frac": 0.99, "batch_size": 64,  "val_batch_size": 64,
+                                    "input_path" :    "dataset/nlp/WIKIQA_singleFile/" ,
+                                    "output_path" :  "dataset/nlp/WIKIQA" ,   
+                                    "format" : "csv"
+                               },
+                    "output_type" :  "file_csv"
+                } ,  
+
+
+                {   "name" : "loader"  ,
+                  "uri" :  "mlmodels.model_tch.matchzoo:WIKI_QA_loader",
+                   "arg" :  {  "name" : "text_dataset",   
+                                        "data_path": "dataset/nlp/WIKI_QA/"   ,
+                                         "data_pack"  : "",   "mode":"pair",  "num_dup":2,   "num_neg":1,
+                                        "batch_size":20,     "resample":true,  
+                                        "sort":false,   "callbacks":"PADDING"
+                                      },
+                   "output_type" :  "pytorch_dataset"
+                },
+
+                {      "uri": "mlmodels.model_tch.matchzoo:WIKI_QA_process",
+                       "pass_data_pars": false,
+                       "arg": {  "train":{
+                                      "transform":true,
+                                      "mode":"pair", "num_dup":2, "num_neg":1,
+                                      "batch_size":20, "stage":"train",
+                                      "resample":true,    "sort":false,
+                                      "dataloader_callback":"PADDING"     },
+
+                                 "test":{
+                                     "transform":true,
+                                     "batch_size":20,
+                                     "stage":"dev",
+                                     "dataloader_callback":"PADDING"
+                                  }    
+                              },
+                    "output_type" :  "pytorch_dataloader"
+                    }           
+
+                ]
+    },
+
+
+
+
+    "data_pars_old":{
+          "dataset":"WIKI_QA",
+          "data_path":"dataset/nlp/",
+          "dataset_pars" : {
+              "data_pack"  : "",
+              "mode":"pair",
+              "num_dup":2,
+              "num_neg":1,
+              "batch_size":20,
+              "resample":true,
+              "sort":false,
+              "callbacks":"PADDING"
+          },
+
+
+          "dataloader" : "",
+          "dataloader_pars" : {
+            "device" :    "cpu",
+            "dataset"  : "None",
+            "stage":"train",
+            "callback":"PADDING"
+          },
+
+
+
+          "preprocess":{
+             "train":{
+                "transform":true,
+                "mode":"pair",
+                "num_dup":2,
+                "num_neg":1,
+                "batch_size":20,
+                "stage":"train",
+                "resample":true,
+                "sort":false,
+                "dataloader_callback":"PADDING"
+             },
+             "test":{
+                "transform":true,
+                "batch_size":20,
+                "stage":"dev",
+                "dataloader_callback":"PADDING"
+             }
+          }
+       },
+
+
+    "compute_pars":{
+
+          "compute_pars" :{
+            "model": "None",
+            "optimizer": "optim.Optimizer",
+            "trainloader": "DataLoader",
+            "validloader": "DataLoader",
+            "device": "cpu",
+            "start_epoch": 1,
+            "epochs":  1,
+            "validate_interval":  "None",
+            "scheduler": "None",
+            "clip_norm": "None",
+            "patience": "None",
+            "key": "None" ,
+            "checkpoint": "",
+            "save_dir": "",
+            "save_all": true,
+            "verbose": 1
+          },
+
+
+          "optimizer":{
+             "ADAMW":{
+                "lr":5e-5, "beta1":0.9, "beta2":0.98, "eps":1e-8 }
+          },
+
+
+          "optimize_parameters":true,
+          "XXX-epochs":10
+       },
+
+
+  "out_pars":{
+          "checkpointdir":"ztest/model_tch/MATCHZOO/BERT/checkpoints/",
+          "path":"ztest/model_tch/MATCHZOO/BERT/"
+       }
+    }
+
+
+
+
+
+
+}
+ }

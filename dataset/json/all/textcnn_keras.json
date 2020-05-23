@@ -1,0 +1,61 @@
+{
+	"test": {
+
+		"model_pars": {
+			"learning_rate": 0.001,
+			"sequence_length": 56,
+			"num_classes": 2,
+			"drop_out" : 0.5,
+			"l2_reg_lambda" : 0.0,
+			"optimization" : "adam",
+			"embedding_size" : 300,
+			"filter_sizes": [3, 4, 5],
+			"num_filters" : 128
+
+
+		},
+
+		"data_pars": {
+			"positive_data_file": "./dataset/rt-polaritydata/rt-polarity.pos",
+			"negative_data_file": "./dataset/rt-polaritydata/rt-polarity.neg",
+			"DEV_SAMPLE_PERCENTAGE": 0.1,
+			"data_type": "pandas",
+			"size": [0, 0, 6],
+			"output_size": [0, 6],
+			"train": "True",
+			"word2vec_model_path":"./dataset/GoogleNews-vectors-negative300.bin"
+		},
+
+
+		"compute_pars": {
+			"epochs": 10,
+			"batch_size" : 128,
+			"return_pred" : "True"
+			
+		},
+
+
+		"out_pars": {
+			"out_path": "./output/output.csv",
+			"data_type": "pandas",
+			"size": [0, 0, 6],
+			"output_size": [0, 6],
+			"modelpath":"./output/model/model.h5"
+		}
+	},
+
+
+	"prod": {
+
+		"model_pars": {},
+
+		"data_pars": {}
+
+
+	}
+
+
+
+	
+	
+}

@@ -362,15 +362,29 @@ ________________________________________________________________________________
 [Read-more](https://github.com/arita37/mlmodels/blob/dev/README_addmodel.md)
 
 _______________________________________________________________________________________
+## Testing
+
+[Read-more](https://github.com/arita37/mlmodels/blob/dev/README_testing.md)
+
+_______________________________________________________________________________________
 
 ## Index of functions/methods
 
 [Read-more](https://github.com/arita37/mlmodels/blob/dev/README_index_doc.py)
 
 _______________________________________________________________________________________
+## Research  Papers
+
+[Read-more](https://github.com/arita37/mlmodels/blob/dev/README_index_doc.py)
+
+_______________________________________________________________________________________
 
 
+## Requirements base to run ml_models, ml_optim
 
+[Read-more](https://github.com/arita37/mlmodels/blob/053b7e8afcf907e9135b50a10016a78e010e161c/requirements_base.txt)
+
+_______________________________________________________________________________________
 ### LSTM example in TensorFlow ([Example notebook](mlmodels/example/1_lstm.ipynb))
 
 #### Define model and data definitions
